@@ -1,0 +1,1070 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SMA NEGERI SELEMEW</title>
+    <!-- FontAwesome untuk ikon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #1e3a8a;
+            --secondary-color: #3b82f6;
+            --accent-color: #f59e0b;
+            --bg-light: #f8fafc;
+            --text-dark: #1e293b;
+            --text-muted: #64748b;
+            --border-color: #e2e8f0;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        /* HEADER & NAVIGATION */
+        header {
+            background-color: #ffffff;
+            border-bottom: 2px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 5%;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-badge {
+            width: 60px;
+            height: 60px;
+            object-fit: contain;
+            background: transparent;
+            border: none;
+            border-radius: 0;
+            display: block;
+            flex-shrink: 0;
+        }
+
+        .logo-text h1 {
+            font-size: 1.3rem;
+            color: var(--primary-color);
+            letter-spacing: 0.5px;
+        }
+
+        .btn-portal {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 6px;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.2s;
+        }
+
+        .btn-portal:hover {
+            background-color: var(--secondary-color);
+        }
+
+        nav {
+            background-color: var(--primary-color);
+            padding: 0 5%;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            overflow-x: auto;
+        }
+
+        .nav-links li a {
+            display: block;
+            color: #ffffff;
+            text-decoration: none;
+            padding: 12px 18px;
+            font-size: 0.95rem;
+            font-weight: 500;
+            white-space: nowrap;
+            transition: background-color 0.2s;
+        }
+
+        .nav-links li a:hover,
+        .nav-links li a.active {
+            background-color: rgba(255, 255, 255, 0.15);
+            border-bottom: 3px solid var(--accent-color);
+        }
+
+        /* CONTAINER UTAMA */
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 0 20px;
+        }
+
+        .page-section {
+            display: none;
+        }
+
+        .page-section.active {
+            display: block;
+        }
+
+        /* HERO SLIDER (Halaman Utama) */
+        .hero-slider {
+            position: relative;
+            background-color: #cbd5e1;
+            border-radius: 12px;
+            overflow: hidden;
+            height: 350px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .slide {
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+        }
+
+        .slide.active { opacity: 1; }
+
+        .slide-overlay {
+            background: rgba(0,0,0,0.5);
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .slide h2 { font-size: 2rem; margin-bottom: 10px; }
+
+        .slider-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255,255,255,0.7);
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.2rem;
+            color: var(--text-dark);
+            transition: background 0.2s;
+            z-index: 10;
+        }
+
+        .slider-btn:hover { background: white; }
+        .slider-btn.prev { left: 15px; }
+        .slider-btn.next { right: 15px; }
+
+        .slider-dots {
+            position: absolute;
+            bottom: 15px;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            z-index: 10;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.5);
+            cursor: pointer;
+        }
+
+        .dot.active { background: white; width: 24px; border-radius: 6px; }
+
+        /* SECTIONS & CARDS */
+        .section-box {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
+            margin-bottom: 30px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+        }
+
+        .section-title {
+            font-size: 1.4rem;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* Sambutan Kepala Sekolah */
+        .principal-flex {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .principal-avatar {
+            width: 100px;
+            height: 100px;
+            background: #e2e8f0;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: #94a3b8;
+            flex-shrink: 0;
+        }
+
+        /* Grid Berita */
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .news-card {
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            overflow: hidden;
+            background: white;
+        }
+
+        .news-img {
+            height: 140px;
+            background: #cbd5e1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #64748b;
+        }
+
+        .news-content {
+            padding: 15px;
+        }
+
+        .news-content h4 {
+            margin-bottom: 8px;
+            color: var(--primary-color);
+        }
+
+        .news-content p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        /* Grid Dua Kolom (Kegiatan) */
+        .two-col-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .list-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 0;
+            border-bottom: 1px dashed var(--border-color);
+        }
+
+        .list-icon {
+            width: 35px;
+            height: 35px;
+            background: #e0f2fe;
+            color: var(--secondary-color);
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* FOOTER & BOTTOM NAV */
+        footer {
+            background: #0f172a;
+            color: white;
+            padding: 40px 5% 20px;
+            margin-top: 40px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .footer-col h4 {
+            color: var(--accent-color);
+            margin-bottom: 15px;
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 8px;
+        }
+
+        .footer-col ul li a {
+            color: #94a3b8;
+            text-decoration: none;
+        }
+
+        .footer-col ul li a:hover { color: white; }
+
+        .map-placeholder {
+            height: 100px;
+            background: #334155;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #94a3b8;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #1e293b;
+            color: #64748b;
+            font-size: 0.85rem;
+        }
+
+        /* KOMPONEN UNTUK HALAMAN SPESIFIK */
+        /* Profil: SOTK */
+        .tree-node {
+            border: 2px solid var(--primary-color);
+            padding: 10px 15px;
+            border-radius: 6px;
+            background: #eff6ff;
+            text-align: center;
+            font-weight: 600;
+            max-width: 200px;
+            margin: 0 auto;
+        }
+
+        .tree-line {
+            width: 2px;
+            height: 20px;
+            background: var(--primary-color);
+            margin: 0 auto;
+        }
+
+        .tree-children {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        /* Akademik: Grid Guru */
+        .teacher-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            gap: 15px;
+        }
+
+        .teacher-card {
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+        }
+
+        .teacher-avatar {
+            width: 60px;
+            height: 60px;
+            background: #e2e8f0;
+            border-radius: 50%;
+            margin: 0 auto 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: #64748b;
+        }
+
+        /* Kesiswaan / PPDB: Flowchart Alur */
+        .flow-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+            overflow-x: auto;
+            padding: 10px 0;
+        }
+
+        .flow-step {
+            background: #f1f5f9;
+            border: 2px solid var(--secondary-color);
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+            min-width: 120px;
+            flex: 1;
+        }
+
+        .flow-step .step-num {
+            width: 25px;
+            height: 25px;
+            background: var(--secondary-color);
+            color: white;
+            border-radius: 50%;
+            margin: 0 auto 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+        }
+
+        .flow-arrow {
+            font-size: 1.5rem;
+            color: var(--secondary-color);
+        }
+
+        /* Form Styling */
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+        }
+
+        .btn-submit {
+            background: var(--accent-color);
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .btn-submit:hover { background: #d97706; }
+
+        /* MODAL / LOGIN SIMULATION */
+        .modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.5);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.active { display: flex; }
+
+        .modal-content {
+            background: white;
+            width: 90%;
+            max-width: 400px;
+            padding: 25px;
+            border-radius: 10px;
+            position: relative;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            cursor: pointer;
+            font-size: 1.2rem;
+        }
+
+        /* Table */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        table, th, td {
+            border: 1px solid var(--border-color);
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+
+        th { background: #f1f5f9; }
+
+        @media (max-width: 768px) {
+            .two-col-grid { grid-template-columns: 1fr; }
+            .principal-flex { flex-direction: column; text-align: center; }
+            .flow-container { flex-direction: column; }
+            .flow-arrow { transform: rotate(90deg); }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER NAVIGATION -->
+    <header>
+        <div class="header-top">
+            <div class="logo-container">
+                <img class="logo-badge" src="logo-sma-negeri-selemew.png" alt="Logo SMA Negeri Selemew">
+                <div class="logo-text">
+                    <h1>SMA NEGERI SELEMEW</h1>
+                </div>
+            </div>
+            <button class="btn-portal" onclick="toggleModal(true)">
+                <i class="fa-solid fa-right-to-bracket"></i> Login Portal
+            </button>
+        </div>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="#" onclick="showPage('home')" class="active" id="nav-home">Beranda</a></li>
+                <li><a href="#" onclick="showPage('profil')" id="nav-profil">Profil</a></li>
+                <li><a href="#" onclick="showPage('akademik')" id="nav-akademik">Akademik</a></li>
+                <li><a href="#" onclick="showPage('kesiswaan')" id="nav-kesiswaan">Kesiswaan</a></li>
+                <li><a href="#" onclick="showPage('ppdb')" id="nav-ppdb">PPDB</a></li>
+                <li><a href="#" onclick="showPage('berita')" id="nav-berita">Berita</a></li>
+                <li><a href="#" onclick="showPage('kontak')" id="nav-kontak">Kontak</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- KONTEN UTAMA HALAMAN -->
+    <main class="container">
+
+        <!-- 1. HALAMAN UTAMA (HOMEPAGE) -->
+        <div id="page-home" class="page-section active">
+            <!-- Banner Utama / Slider -->
+           <div class="hero-slider" style="height: auto; background: transparent;">
+
+                    <img src="Selamat Datang di SMA Negeri Selemew.png" alt="Selamat Datang di SMA Negeri Selemew"
+                        style="
+            display: block;
+            width: 100%;
+            height: auto;
+            object-fit: contain;
+            border-radius: 12px;
+        ">
+
+                <div class="slider-dots">
+                    <span class="dot active" onclick="setSlide(0)"></span>
+                    <span class="dot" onclick="setSlide(1)"></span>
+                    <span class="dot" onclick="setSlide(2)"></span>
+                </div>
+            </div>
+
+            <!-- Sambutan Kepala Sekolah -->
+            <section class="section-box">
+                <h3 class="section-title"><i class="fa-solid fa-user-tie"></i> Sambutan Kepala Sekolah</h3>
+                <div class="principal-flex">
+                    <div class="principal-avatar">
+                         <img class="principal-avatar" src="joko.jpg" alt="Foto Kepala Sekolah" style="object-fit: cover;">
+                        
+                    </div>
+                    <div>
+                        <h4>Prof. Dr. Ir. H. Fardan Firmansyah, S.Ars.</h4>
+                        <p><em>"Assalamu’alaikum Warahmatullahi Wabarakatuh."</em></p>
+                        <p>Selamat datang di website resmi SMA Negeri Selemew. Kami berkomitmen untuk menyediakan pendidikan berkualitas tinggi yang mengembangkan potensi akademik dan karakter seluruh peserta didik kami guna menghadapi tantangan global masa depan.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Berita Terbaru -->
+            <section class="section-box">
+                <h3 class="section-title"><i class="fa-newspaper"></i> Berita Terbaru</h3>
+                <div class="news-grid">
+                    <div class="news-card">
+                        <div class="news-img">
+                             <img src="utbk.jpg" alt="Pelaksanaan UTBK 2026"
+                            style="width:100%; height:140px; object-fit:cover;">
+                            </div>
+
+                        <div class="news-content">
+                            <h4>Pelaksanaan UTBK 2026</h4>
+                            <p>Persiapan dan pelaksanaan ujian berbasis komputer bagi siswa kelas XII...</p>
+                        </div>
+                    </div>
+                    <div class="news-card">
+                        <div class="news-img">
+                             <img src="fsln.jpg" alt="Pelaksanaan UTBK 2026"
+                            style="width:100%; height:140px; object-fit:cover;">
+                            </div>
+                        <div class="news-content">
+                            <h4>Juara FLS2N Tingkat Provinsi</h4>
+                            <p>Tim Seni SMAN Selemew berhasil memboyong piala di ajang FLS2N...</p>
+                        </div>
+                    </div>
+                    <div class="news-card">
+                        <div class="news-img">
+                             <img src="donor.jpg" alt="Pelaksanaan UTBK 2026"
+                            style="width:100%; height:140px; object-fit:cover;">
+                           </div>
+                        <div class="news-content">
+                            <h4>Kegiatan Donor Darah</h4>
+                            <p>Peringatan hari Pahlawan diisi dengan kegiatan sosial donor darah OSIS...</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Kegiatan & OSIS Grid -->
+            <div class="two-col-grid">
+                <section class="section-box">
+                    <h3 class="section-title"><i class="fa-solid fa-calendar-days"></i> Kegiatan Mendatang</h3>
+                    <div class="list-item">
+                        <div class="list-icon"><i class="fa-solid fa-basketball"></i></div>
+                        <div>
+                            <strong>Ekstrakurikuler Open House</strong>
+                            <p style="font-size:0.8rem; color:#666;">15 November 2026</p>
+                        </div>
+                    </div>
+                    <div class="list-item">
+                        <div class="list-icon"><i class="fa-solid fa-book"></i></div>
+                        <div>
+                            <strong>Ujian Tengah Semester</strong>
+                            <p style="font-size:0.8rem; color:#666;">01 Desember 2026</p>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="section-box">
+                    <h3 class="section-title"><i class="fa-solid fa-users-gear"></i> Kegiatan OSIS</h3>
+                    <div class="list-item">
+                        <div class="list-icon"><i class="fa-solid fa-check-to-slot"></i></div>
+                        <div>
+                            <strong>Pemilihan Ketua OSIS Periode 2026/2027</strong>
+                            <p style="font-size:0.8rem; color:#666;">Pelaksanaan voting secara e-voting</p>
+                        </div>
+                    </div>
+                    <div class="list-item">
+                        <div class="list-icon"><i class="fa-solid fa-hand-holding-heart"></i></div>
+                        <div>
+                            <strong>Bakti Sosial Lingkungan Sekolah</strong>
+                            <p style="font-size:0.8rem; color:#666;">Program Sabtu Bersih dan Hijau</p>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+        <!-- 2. HALAMAN PROFIL -->
+        <div id="page-profil" class="page-section">
+            <section class="section-box">
+                <h3 class="section-title">Visi & Misi</h3>
+                <div style="margin-bottom: 20px;">
+                    <h4>Visi</h4>
+                    <p style="background:#f8fafc; padding:10px; border-left:4px solid var(--primary-color);">"Menjadi Sekolah Unggul Berlandaskan IMTAK dan IPTEK serta Berwawasan Lingkungan pada Tahun 2030."</p>
+                </div>
+                <div>
+                    <h4>Misi</h4>
+                    <ul style="margin-left:20px; margin-top:10px;">
+                        <li>Menyelenggarakan pembelajaran berkualitas aktif, kreatif, dan inovatif.</li>
+                        <li>Menanamkan nilai-nilai keagamaan dan budi pekerti luhur.</li>
+                        <li>Mengembangkan bakat siswa melalui kegiatan ekstrakurikuler.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="section-box">
+                <h3 class="section-title">Struktur Organisasi</h3>
+                <div style="padding: 20px 0;">
+                    <div class="tree-node">Kepala Sekolah</div>
+                    <div class="tree-line"></div>
+                    <div class="tree-node" style="background:#e0f2fe;">Komite Sekolah</div>
+                    <div class="tree-line"></div>
+                    <div class="tree-children">
+                        <div class="tree-node">Wakasek Kurikulum</div>
+                        <div class="tree-node">Wakasek Kesiswaan</div>
+                        <div class="tree-node">Wakasek Sarpras</div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- 3. HALAMAN AKADEMIK -->
+        <div id="page-akademik" class="page-section">
+            <section class="section-box">
+                <h3 class="section-title">Kurikulum</h3>
+                <p>SMA Negeri Selemew menerapkan <strong>Kurikulum Merdeka</strong> yang memberikan kebebasan kepada peserta didik untuk memilih mata pelajaran sesuai minat dan bakatnya.</p>
+            </section>
+
+            <section class="section-box">
+                <h3 class="section-title">Daftar Guru</h3>
+                <div class="teacher-grid">
+                    <div class="teacher-card">
+                        <div class="teacher-avatar"><i class="fa-solid fa-user-graduate"></i></div>
+                        <strong>Budi Santoso, M.Pd</strong>
+                        <p style="font-size:0.8rem;">Matematika</p>
+                    </div>
+                    <div class="teacher-card">
+                        <div class="teacher-avatar"><i class="fa-solid fa-user-graduate"></i></div>
+                        <strong>Siti Rahma, S.Pd</strong>
+                        <p style="font-size:0.8rem;">Bahasa Inggris</p>
+                    </div>
+                    <div class="teacher-card">
+                        <div class="teacher-avatar"><i class="fa-solid fa-user-graduate"></i></div>
+                        <strong>Drs. Agus Wijaya</strong>
+                        <p style="font-size:0.8rem;">Fisika</p>
+                    </div>
+                    <div class="teacher-card">
+                        <div class="teacher-avatar"><i class="fa-solid fa-user-graduate"></i></div>
+                        <strong>Dewi Lestari, S.Si</strong>
+                        <p style="font-size:0.8rem;">Kimia</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- 4. HALAMAN KESISWAAN -->
+        <div id="page-kesiswaan" class="page-section">
+            <section class="section-box">
+                <h3 class="section-title">Ekstrakurikuler</h3>
+                <div class="two-col-grid">
+                    <ul>
+                        <li>Pramuka (Wajib)</li>
+                        <li>Paskibra</li>
+                        <li>PMR</li>
+                    </ul>
+                    <ul>
+                        <li>Basket / Futsal</li>
+                        <li>Seni Musik & Tari</li>
+                        <li>Klub Sains / OSN</li>
+                    </ul>
+                </div>
+            </section>
+        </div>
+
+        <!-- 5. HALAMAN PENDAFTARAN (PPDB) -->
+        <div id="page-ppdb" class="page-section">
+            <section class="section-box">
+                <h3 class="section-title">Alur Pendaftaran (PPDB)</h3>
+                <div class="flow-container">
+                    <div class="flow-step">
+                        <div class="step-num">1</div>
+                        <strong>Pendaftaran</strong>
+                        <p style="font-size:0.8rem;">Isi formulir online</p>
+                    </div>
+                    <div class="flow-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+                    <div class="flow-step">
+                        <div class="step-num">2</div>
+                        <strong>Verifikasi</strong>
+                        <p style="font-size:0.8rem;">Berkas fisik / PDF</p>
+                    </div>
+                    <div class="flow-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+                    <div class="flow-step">
+                        <div class="step-num">3</div>
+                        <strong>Pengumuman</strong>
+                        <p style="font-size:0.8rem;">Hasil seleksi online</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section-box">
+                <h3 class="section-title"><i class="fa-solid fa-file-pdf"></i> Persyaratan PDF</h3>
+                <p style="margin-bottom: 10px;">Unduh brosur dan syarat pendaftaran format PDF:</p>
+                <a class="btn-portal" href="syarat-ppdb.pdf" download="Syarat-PPDB-SMA-Selemew.pdf" style="text-decoration:none; width:fit-content;">
+                    <i class="fa-solid fa-download"></i> Download Syarat PPDB.pdf
+                </a>
+            </section>
+
+            <section class="section-box">
+                <h3 class="section-title">Formulir Online</h3>
+                <form id="ppdbForm">
+                    <div class="form-group">
+                        <label for="namaPPDB">Nama Lengkap</label>
+                        <input type="text" id="namaPPDB" name="nama" placeholder="Masukkan nama sesuai Ijazah" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="emailPPDB">Email</label>
+                        <input type="email" id="emailPPDB" name="email" placeholder="nama@email.com" required>
+                    </div>
+                    <button type="submit" class="btn-submit">Submit Pendaftaran</button>
+                </form>
+                <div id="pesanPPDB" role="status" aria-live="polite" style="display:none; margin-top:15px;"></div>
+            </section>
+        </div>
+
+        <!-- 6. HALAMAN BERITA -->
+        <div id="page-berita" class="page-section">
+            <section class="section-box">
+                <h3 class="section-title">Arsip Berita & Informasi</h3>
+                <p>Halaman kumpulan artikel berita terkini SMA Negeri Selemew.</p>
+            </section>
+        </div>
+
+        <!-- 7. HALAMAN KONTAK -->
+        <div id="page-kontak" class="page-section">
+            <section class="section-box">
+                <h3 class="section-title">Hubungi Kami</h3>
+                <p><strong>Alamat:</strong> Jl. Pendidikan No. 123, selemew</p>
+                <p><strong>Telepon:</strong> (021) 555-1234</p>
+                <p><strong>Email:</strong> info@sman-selemew.sch.id</p>
+            </section>
+        </div>
+
+        <!-- 8. PORTAL AKADEMIK (SETELAH LOGIN) -->
+        <div id="page-portal-dashboard" class="page-section">
+            <div style="background: #dcfce7; color: #166534; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+                <i class="fa-solid fa-circle-check"></i> Selamat Datang di <strong>Portal Akademik Siswa</strong>!
+            </div>
+
+            <section class="section-box">
+                <h3 class="section-title">Jadwal Pelajaran Hari Ini</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Jam</th>
+                            <th>Mata Pelajaran</th>
+                            <th>Guru</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>07:00 - 08:30</td>
+                            <td>Matematika</td>
+                            <td>Budi Santoso, M.Pd</td>
+                        </tr>
+                        <tr>
+                            <td>08:30 - 10:00</td>
+                            <td>Bahasa Inggris</td>
+                            <td>Siti Rahma, S.Pd</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <div class="two-col-grid">
+                <section class="section-box">
+                    <h3 class="section-title">Nilai Rapor</h3>
+                    <p>Semester Ganjil 2026/2027: <strong>3.85 (Sangat Baik)</strong></p>
+                </section>
+                <section class="section-box">
+                    <h3 class="section-title">Absensi</h3>
+                    <p>Hadir: 98% | Sakit: 1 Hari | Izin: 0</p>
+                </section>
+            </div>
+
+            <section class="section-box">
+                <h3 class="section-title">Pengumuman Guru</h3>
+                <div style="background:#fffbe0; padding: 10px; border-radius: 6px;">
+                    <strong>[Matematika]</strong> Tugas Mandiri Bab 3 dapat dikumpulkan paling lambat hari Jumat.
+                </div>
+            </section>
+        </div>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h4>SMA NEGERI SELEMEW</h4>
+                <p style="font-size:0.85rem; color:#94a3b8;">Mewujudkan generasi unggul, cerdas, dan berkarakter mulia.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Tautan Penting</h4>
+                <ul>
+                    <li><a href="#" onclick="showPage('home')">Kalender Akademik</a></li>
+                    <li><a href="#" onclick="showPage('kesiswaan')">OSIS</a></li>
+                    <li><a href="#" onclick="showPage('ppdb')">PPDB Online</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Alamat & Kontak</h4>
+                <p style="font-size:0.85rem; color:#94a3b8;">Jl. Pendidikan No. 123, Selemew<br>Telp: (021) 555-1234</p>
+            </div>
+            <div class="footer-col">
+                <h4>Peta Lokasi</h4>
+                <div class="map-placeholder">
+                    <i class="fa-solid fa-location-dot fa-2x"></i>
+                </div>
+            </div>
+        </div>
+        <div class="copyright">
+            &copy; 2026 SMA Negeri Selemew. All Rights Reserved.
+        </div>
+    </footer>
+
+    <!-- MODAL LOGIN PORTAL -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="toggleModal(false)">&times;</span>
+            <h3 style="margin-bottom: 15px; color: var(--primary-color);">Login Portal Akademik</h3>
+            <form onsubmit="handleLogin(event)">
+                <div class="form-group">
+                    <label>NISN / NIP</label>
+                    <input type="text" placeholder="Masukkan NISN Anda" required>
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" placeholder="••••••••" required>
+                </div>
+                <button type="submit" class="btn-submit" style="width: 100%;">Masuk Portal</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT UTAMA -->
+    <script>
+        // Navigasi antarhalaman
+        function showPage(pageId) {
+            const sections = document.querySelectorAll('.page-section');
+            const target = document.getElementById('page-' + pageId);
+
+            if (!target) return;
+
+            sections.forEach(section => section.classList.remove('active'));
+            target.classList.add('active');
+
+            document.querySelectorAll('.nav-links a').forEach(link => link.classList.remove('active'));
+            const activeNav = document.getElementById('nav-' + pageId);
+            if (activeNav) activeNav.classList.add('active');
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Cegah tautan href="#" menggulir halaman ke atas secara tidak sengaja
+        document.querySelectorAll('a[onclick*="showPage"]').forEach(link => {
+            link.addEventListener('click', event => event.preventDefault());
+        });
+
+        // Modal login
+        function toggleModal(show) {
+            const modal = document.getElementById('loginModal');
+            if (!modal) return;
+            modal.classList.toggle('active', Boolean(show));
+        }
+
+        // Login ini hanya simulasi tampilan, belum memeriksa akun ke server
+        function handleLogin(event) {
+            event.preventDefault();
+            const form = event.target;
+            const username = form.querySelector('input[type="text"]').value.trim();
+            const password = form.querySelector('input[type="password"]').value.trim();
+
+            if (!username || !password) {
+                alert('Silakan isi NISN/NIP dan Password.');
+                return;
+            }
+
+            toggleModal(false);
+            showPage('portal-dashboard');
+            form.reset();
+            alert('Login simulasi berhasil. Untuk login sungguhan diperlukan sistem akun dan server.');
+        }
+
+        // Tutup modal dengan tombol Escape atau klik area gelap di luar kotak
+        document.addEventListener('keydown', event => {
+            if (event.key === 'Escape') toggleModal(false);
+        });
+
+        const loginModal = document.getElementById('loginModal');
+        if (loginModal) {
+            loginModal.addEventListener('click', event => {
+                if (event.target === loginModal) toggleModal(false);
+            });
+        }
+
+        // Slider banner
+        let currentSlide = 0;
+        const slides = Array.from(document.querySelectorAll('.hero-slider .slide'));
+        const dots = Array.from(document.querySelectorAll('.hero-slider .dot'));
+        let sliderTimer = null;
+
+        function updateSlider() {
+            if (slides.length === 0) return;
+            slides.forEach((slide, index) => slide.classList.toggle('active', index === currentSlide));
+            dots.forEach((dot, index) => dot.classList.toggle('active', index === currentSlide));
+        }
+
+        function moveSlide(direction) {
+            if (slides.length <= 1) return;
+            currentSlide = (currentSlide + direction + slides.length) % slides.length;
+            updateSlider();
+        }
+
+        function setSlide(index) {
+            if (index < 0 || index >= slides.length) return;
+            currentSlide = index;
+            updateSlider();
+            restartSliderTimer();
+        }
+
+        function restartSliderTimer() {
+            if (sliderTimer) clearInterval(sliderTimer);
+            if (slides.length > 1) {
+                sliderTimer = setInterval(() => moveSlide(1), 5000);
+            }
+        }
+
+        if (slides.length > 0) updateSlider();
+        restartSliderTimer();
+
+        // Formulir PPDB: validasi sisi browser dan konfirmasi simulasi
+        const ppdbForm = document.getElementById('ppdbForm');
+        if (ppdbForm) {
+            ppdbForm.addEventListener('submit', event => {
+                event.preventDefault();
+                if (!ppdbForm.reportValidity()) return;
+
+                const nama = document.getElementById('namaPPDB').value.trim();
+                const email = document.getElementById('emailPPDB').value.trim();
+                const pesan = document.getElementById('pesanPPDB');
+
+                pesan.style.display = 'block';
+                pesan.style.background = '#dcfce7';
+                pesan.style.color = '#166534';
+                pesan.style.padding = '15px';
+                pesan.style.borderRadius = '6px';
+                pesan.textContent = `Formulir berhasil divalidasi untuk ${nama} (${email}). Ini masih simulasi; data belum dikirim atau disimpan ke server.`;
+                ppdbForm.reset();
+            });
+        }
+    </script>
+</body>
+</html>
